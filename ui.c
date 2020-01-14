@@ -168,11 +168,11 @@ static void ui_help(void)
     aa_puts(context, 0, 3, AA_SPECIAL, " z       - unzoom                     Z       - zoom               ");
     aa_puts(context, 0, 4, AA_SPECIAL, " s       - Save image                                              ");
     aa_puts(context, 0, 5, AA_SPECIAL, " m       - change dithering mode      q       - quit               ");
-    aa_puts(context, 0, 6, AA_SPECIAL, " i       - turns inversion on         I       - intversion off     ");
+    aa_puts(context, 0, 6, AA_SPECIAL, " i       - turn inversion on          I       - inversion off      ");
     aa_puts(context, 0, 7, AA_SPECIAL, " u       - select attributes          f       - select font        ");
     aa_puts(context, 0, 8, AA_SPECIAL, " space   - redraw                     ',','.' - change contrast    ");
-    aa_puts(context, 0, 9, AA_SPECIAL, " ';',''' - change gamma               '<','>' - change bright      ");
-    aa_puts(context, 0, 10, AA_SPECIAL, " '+','-' - zoom/unzoom                '<','>' - change bright      ");
+    aa_puts(context, 0, 9, AA_SPECIAL, " ';',''' - change gamma               '<','>' - change brightness  ");
+    aa_puts(context, 0, 10, AA_SPECIAL, " '+','-' - zoom/unzoom                                            ");
 }
 void main_loop(void)
 {

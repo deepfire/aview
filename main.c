@@ -1,3 +1,4 @@
+#include <string.h>
 #include <aalib.h>
 #include "image.h"
 #include "ui.h"
@@ -25,8 +26,8 @@ static void parse_cmdline( int argc, char *argv[])
 
   filename[0] = '\0';
   for (i = 1; i < argc; i++) {
-    if (!strncmp(argv[i], "--", 2)) {
-      if (!strcmp(argv[i], "--help")) { showhelp(argv[0]); exit(0); }
+    if (!strncmp(argv[i], "-", 1)) {
+      if (!strcmp(argv[i], "--help") || !strcmp(argv[i], "-h")) { showhelp(argv[0]); exit(0); }
       if (!strcmp(argv[i], "--version")) { showversion(argv[0]); exit(0); }
       printf("Unknown option. Use %s --help for help\n", argv[0]);
       exit(-1);

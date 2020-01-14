@@ -7,14 +7,18 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/time.h>
 #include <unistd.h>
+#include <ctype.h>
 #include <aalib.h>
 
 #include "general.h"
 #include "fli.h"
 
 #define NAMELEN 256
+
+static int f_getkey(void);
 
 struct OPTIONS {
 	char filename[NAMELEN];	/* filename given on command line */
@@ -330,7 +334,7 @@ static void showhelp( void ) {
 	puts( " -b          Process frames when they are loaded." );
 	puts( " -c          Keep a blank screen while frames are being loaded." );
 	puts( " -n <number> Play the animation sequence <n> times." );
-	puts( " -s <delay>  Set delay between frames to <delay> miliseconds." );
+	puts( " -s <delay>  Set delay between frames to <delay> milliseconds." );
 	puts( " -           Read flic file from standard input." );
 	puts( "also standard aalib options are supported" );
 	puts( " -dim, -bold, -reverse, -normal for enabling attributes");
@@ -705,7 +709,7 @@ static void selectsupported(aa_context * c)
 
     aa_setsupported(c, supported);
 }
-int f_getkey(void)
+static int f_getkey(void)
 {
   int c=aa_getkey(context,0);
   switch(c) {
@@ -769,7 +773,6 @@ int main( int argc, char *argv[] ) {
 int quit = 0;
 int playstartframe = 0;
 int first=1;
-long t, tdelta;
 	aa_parseoptions(NULL,NULL,&argc,argv);
 	parse_cmdln( argc, argv, &options );
 	strcpy( fli.filename, options.filename );
