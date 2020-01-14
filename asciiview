@@ -3,11 +3,11 @@
 clear()
 {
   kill $! 2>/dev/null
-  rm -f /tmp/aview$$.pgm 2>/dev/null
+  rm -rf $tmpdir 2>/dev/null
 }
 myconvert()
 {
-   if anytopnm "$1" >/tmp/aview$$.pgm 2>/dev/null ; then
+   if anytopnm "$1" >"$2" 2>/dev/null ; then
      exit
    elif convert -colorspace gray "$1" pgm:- 2>/dev/null ; then
      exit
@@ -53,8 +53,9 @@ while [ "$1" != "" ]; do
   esac
 done
 trap clear 0
-mkfifo /tmp/aview$$.pgm
-outfile=/tmp/aview$$.pgm
+tmpdir=`mktemp -t -d`
+outfile=$tmpdir/aview.pgm
+mkfifo $outfile
 while [ $counter -gt 0 ]; do
 counter=$(($counter-1))
 name=${filenames[$counter]}
@@ -65,10 +66,10 @@ case "$name" in
   aaflip $options "$name"
   ;;
 *)
-  myconvert "$name" >/tmp/aview$$.pgm &
+  myconvert "$name" "$outfile" >"$outfile" &
   pid=$!
   PATH="$PATH:."
-  aview  $options /tmp/aview$$.pgm
+  aview  $options $outfile
   kill $pid 2>/dev/null
 esac
 else
